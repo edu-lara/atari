@@ -47,11 +47,13 @@ Execute os comandos na raiz da pasta `atari` e siga os passos:
    # python treinar_pong.py
    ```
 
-   O programa pede um número inteiro positivo de passos adicionais. Esses passos são somados ao modelo atual ou ao checkpoint mais recente, se existir; não são o total acumulado desejado.
+   O programa pedirá um número inteiro positivo de passos adicionais de treinamento. Eles serão somados ao progresso do modelo atual ou do checkpoint mais recente, se existir.
 
-   Como referência prática, a partir de cerca de **1 milhão de passos de interação** já é possível começar a notar mudanças no comportamento do agente. Isso não garante um bom desempenho, porque os resultados variam conforme o jogo e o treino pode precisar de mais passos que o mencionado.
+   Como referência da minha experiência, comecei com execuções de **100 mil passos** e depois **250 mil passos** para observar o tempo de processamento e o comportamento do agente. No meu computador com Apple Silicon (M1), comecei a notar mudanças mais claras depois de ultrapassar **1 milhão de passos acumulados**, após cerca de **1h30 de treinamento** e usando paralelismo. Esse tempo varia conforme o os componentes do seu computador e as configurações do treino.
    
-   O contador de passos também pode passar um pouco do valor informado para concluir um ciclo do PPO. E se você pressione `q` durante o treinamento, ele realizará uma parada segura e salvará o modelo atual.
+   O contador pode passar um pouco do valor informado para concluir um ciclo do PPO; fique tranquilo.
+   
+   E pressione `q` durante o treinamento para solicitar uma parada segura e salvar o modelo atual.
 
 2. **Avalie o modelo.**
 
@@ -67,7 +69,7 @@ Execute os comandos na raiz da pasta `atari` e siga os passos:
 
 3. **Assista ao agente.**
 
-   Para visualizarmos o resultado, necessitamos de um ambiente gráfico. Este script procura primeiro o melhor modelo (`breakout_melhor/best_model.zip` ou `pong_melhor/best_model.zip`) e, se não o encontrar, usa o modelo atual em `modelos/`, para apresentar o visual do treinamento.
+   Para assistir ao agente, é necessário um ambiente gráfico. O script procura primeiro o melhor modelo (`breakout_melhor/best_model.zip` ou `pong_melhor/best_model.zip`) e, se não o encontrar, carrega o modelo atual em `modelos/`. Assim, você pode observar o comportamento aprendido durante o treinamento.
 
    ```bash
    # Breakout
@@ -120,15 +122,15 @@ Observe a tendência das métricas ao longo de várias linhas, em vez de interpr
 
 Modelos e logs são artefatos gerados localmente e estão excluídos do Git por `.gitignore`.
 
-## TOP 5 jogos extras para treinar
+## Cinco jogos para treinar
 
-Estes jogos foram ordenados por complexidade (fácil ao moderado) para iniciar o seu aprendizado por reforço:
+Esta é uma ordem sugerida para começar, dos jogos mais simples aos de complexidade moderada:
 
 1. Breakout.
 2. Pong.
-3. Enduro
-4. Space Invaders
-5. Seaquest
+3. Enduro.
+4. Space Invaders.
+5. Seaquest.
 
 Os scripts atuais treinam Breakout e Pong. Para treinar outro jogo, é preciso adaptar o identificador do ambiente e os caminhos dos modelos nos scripts. Você pode consultar a [lista oficial de ambientes Atari do ALE](https://ale.farama.org/environments/) para ver outras opções.
 
@@ -170,7 +172,7 @@ O processamento paralelo ajudou a executar os experimentos, mas também aumentou
 
 Além de observar se os agentes conseguiam vencer, meu objetivo era entender como aprendem por tentativa e erro, usando observações, ações e recompensas.
 
-Por fim, o aprendizado por reforço exige tempo, esforço e recursos computacionais. E quando seus conceitos são adaptados a outras tarefas, conseguimos criar agente que podem tomar decisões sozinhos, com o mínimo e dependendo do treino, até nenhuma intervenção humana.
+Por fim, o aprendizado por reforço exige tempo, esforço e recursos computacionais. Em algumas tarefas, esses conceitos podem ser adaptados para que um agente tome decisões sem intervenção humana a cada etapa. Isso depende de como o problema, as recompensas e a definicação dos limites do agente foram configurados.
 
 ## TensorBoard
 
