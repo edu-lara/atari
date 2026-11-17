@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "skills": {
+    "stable-baselines3": {
+      "source": "KalarisLabs/research-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/stable-baselines3/SKILL.md",
+      "computedHash": "4940107a4b6efd66e57b459fb113b5909e39ef93e4ce336857af2328ee7208aa"
+    }
+  }
+}
