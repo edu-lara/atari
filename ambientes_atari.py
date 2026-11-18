@@ -2,12 +2,33 @@
 
 import ale_py
 import gymnasium as gym
+import numpy as np
 from stable_baselines3.common.env_util import make_atari_env
 from stable_baselines3.common.vec_env import (
     SubprocVecEnv,
+    VecEnvWrapper,
     VecFrameStack,
     VecTransposeImage,
 )
+
+
+class IniciarComFire(VecEnvWrapper):
+    """Pressiona FIRE após cada reset dos jogos que esperam esse comando."""
+
+    def step_wait(self):
+        return self.venv.step_wait()
+
+    def reset(self):
+        self.venv.reset()
+        # O Video Pinball precisa puxar o lançador (DOWN) antes de FIRE.
+        # FIRE sozinho apenas mantém o botão acionado e não lança a bola.
+        observacao = None
+        for acao, repeticoes in ((5, 8), (1, 1), (0, 1)):
+            for _ in range(repeticoes):
+                observacao, _, _, _ = self.venv.step(
+                    np.full(self.num_envs, acao, dtype=np.int64)
+                )
+        return observacao
 
 
 def criar_ambiente_atari(
@@ -19,6 +40,7 @@ def criar_ambiente_atari(
     clip_reward=True,
     subprocess=False,
     env_kwargs=None,
+    iniciar_com_fire=False,
 ):
     """Cria ambiente Atari com quatro frames e imagem em canais primeiro."""
     gym.register_envs(ale_py)
@@ -36,5 +58,7 @@ def criar_ambiente_atari(
         kwargs["vec_env_kwargs"] = {"start_method": "spawn"}
 
     env = make_atari_env(nome, **kwargs)
+    if iniciar_com_fire:
+        env = IniciarComFire(env)
     env = VecFrameStack(env, n_stack=4)
     return VecTransposeImage(env)

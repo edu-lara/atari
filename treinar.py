@@ -110,6 +110,15 @@ class AvaliacaoPorPassos(EvalCallback):
             self.proxima_avaliacao += self.intervalo_passos
         return super()._on_step()
 
+    def _on_training_end(self):
+        # Garante que sessões menores que o intervalo também produzam uma
+        # avaliação atualizada e possam salvar um novo melhor modelo.
+        if (self.evaluations_timesteps
+                and self.evaluations_timesteps[-1] == self.num_timesteps):
+            return
+        self.proxima_avaliacao = self.num_timesteps
+        super()._on_step()
+
 
 class PararComQ(BaseCallback):
     def __init__(self, passos_iniciais, passos_solicitados):
@@ -249,12 +258,14 @@ def treinar(nome, ambiente_id, slug, passos_adicionais):
     env = criar_ambiente_atari(
         ambiente_id, n_envs=NUM_AMBIENTES, seed=42,
         terminal_on_life_loss=False, subprocess=True,
+        iniciar_com_fire=(slug == "video_pinball"),
     )
     env_avaliacao = None
     try:
         env_avaliacao = criar_ambiente_atari(
             ambiente_id, n_envs=1, seed=123, terminal_on_life_loss=False,
             clip_reward=(slug != "breakout"),
+            iniciar_com_fire=(slug == "video_pinball"),
         )
         if checkpoint is not None and (
             not arquivo_modelo.exists()
@@ -297,7 +308,8 @@ def treinar(nome, ambiente_id, slug, passos_adicionais):
         arquivo_historico = pasta_log_avaliacao / "evaluations.npz"
         partidas_por_avaliacao = 5 if slug == "video_pinball" else PARTIDAS_POR_AVALIACAO
         avaliacao = AvaliacaoPorPassos(
-            env_avaliacao, intervalo_passos=INTERVALO_AVALIACAO,
+            env_avaliacao,
+            intervalo_passos=(100_000 if slug == "video_pinball" else INTERVALO_AVALIACAO),
             best_model_save_path=str(pasta_melhor), log_path=str(pasta_log_avaliacao),
             n_eval_episodes=partidas_por_avaliacao, deterministic=True, verbose=1,
         )

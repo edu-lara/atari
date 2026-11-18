@@ -76,6 +76,7 @@ def main():
         terminal_on_life_loss=False,
         clip_reward=(slug != "breakout"),
         env_kwargs={"render_mode": "human"},
+        iniciar_com_fire=(slug == "video_pinball"),
     )
     teclado = LeitorTeclaQ()
 
@@ -92,7 +93,12 @@ def main():
         teclado.iniciar()
 
         while True:
-            acao, _ = modelo.predict(observacao, deterministic=True)
+            # No Pinball, a ação modal do modelo pode manter uma combinação
+            # como RIGHTFIRE indefinidamente; amostrar a política permite que
+            # ela alterne flippers e use DOWN/FIRE quando necessário.
+            acao, _ = modelo.predict(
+                observacao, deterministic=(slug != "video_pinball")
+            )
             observacao, recompensas, terminou, _ = env.step(acao)
             recompensa_total += float(recompensas[0])
 

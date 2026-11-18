@@ -43,6 +43,7 @@ def criar_ambiente(ambiente_id, slug):
         seed=123,
         terminal_on_life_loss=False,
         clip_reward=(slug != "breakout"),
+        iniciar_com_fire=(slug == "video_pinball"),
     )
 
 
