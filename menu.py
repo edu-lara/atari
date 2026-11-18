@@ -1,0 +1,62 @@
+import ale_py
+import gymnasium as gym
+import subprocess
+import sys
+from pathlib import Path
+
+from terminal import limpar_terminal
+
+# Os workers do SubprocVecEnv usam spawn e reimportam este módulo principal.
+# Registrar aqui deixa os ambientes ALE disponíveis também nesses processos.
+gym.register_envs(ale_py)
+
+
+def main():
+    opcoes = {
+        "1": ("Treinar", "treinar"),
+        "2": ("Assistir", "assistir"),
+        "3": ("Avaliar", "avaliar"),
+        "4": ("Diagnosticar", "diagnosticar"),
+        "5": ("Simular ambiente", "simular"),
+    }
+
+    while True:
+        limpar_terminal()
+        print("\nO que deseja fazer?")
+        for numero, (nome, _) in opcoes.items():
+            print(f"{numero}. {nome}")
+        print("0. Sair")
+
+        escolha = input("Escolha (0-5): ").strip()
+        if escolha == "0":
+            print("Saindo.")
+            return
+        if escolha not in opcoes:
+            print("Opção inválida. Digite um número de 0 a 5.")
+            continue
+
+        _, modulo = opcoes[escolha]
+        if modulo in ("assistir", "simular"):
+            arquivo_utilitario = Path(__file__).resolve().with_name(f"{modulo}.py")
+            try:
+                subprocess.run(
+                    [sys.executable, str(arquivo_utilitario)],
+                    cwd=Path(__file__).resolve().parent,
+                    check=False,
+                )
+            except KeyboardInterrupt:
+                print("\nOperação interrompida.")
+            continue
+
+        if modulo == "treinar":
+            from treinar import main as executar
+        elif modulo == "avaliar":
+            from avaliar import main as executar
+        elif modulo == "diagnosticar":
+            from diagnosticar import main as executar
+
+        executar()
+
+
+if __name__ == "__main__":
+    main()

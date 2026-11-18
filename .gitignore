@@ -75,8 +75,7 @@ logs/
 
 # Models and other generated artifacts
 modelos/
-pong_melhor/
-breakout_melhor/
+*_melhor/
 *.h5
 *.keras
 *.pkl
