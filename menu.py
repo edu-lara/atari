@@ -22,17 +22,17 @@ def main():
 
     while True:
         limpar_terminal()
-        print("\nO que deseja fazer?")
+        print("O que deseja fazer?\n")
         for numero, (nome, _) in opcoes.items():
             print(f"{numero}. {nome}")
         print("0. Sair")
 
-        escolha = input("Escolha (0-5): ").strip()
+        escolha = input("\nEscolha (0-5): ").strip()
         if escolha == "0":
             print("Saindo.")
             return
         if escolha not in opcoes:
-            print("Opção inválida. Digite um número de 0 a 5.")
+            print("\nOpção inválida. Digite um número de 0 a 5.\n")
             continue
 
         _, modulo = opcoes[escolha]
