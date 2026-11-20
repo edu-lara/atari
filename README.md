@@ -6,9 +6,11 @@ Projeto pessoal em que estudo o aprendizado por reforço treinando agentes com P
 
 ## Jogos utilizados
 
-| Freeway | Atlantis | Video Pinball | Pong | Breakout |
-|:---:|:---:|:---:|:---:|:---:|
-| ![Freeway](imagens/freeway.gif) | ![Atlantis](imagens/atlantis.gif) | ![Video Pinball](imagens/video_pinball.gif) | ![Pong](imagens/pong.gif) | ![Breakout](imagens/breakout.gif) |
+| Freeway | Atlantis | Video Pinball |
+|:---:|:---:|:---:|
+| ![Freeway](imagens/freeway.gif) | ![Atlantis](imagens/atlantis.gif) | ![Video Pinball](imagens/video_pinball.gif) |
+| Pong | Breakout | Enduro |
+| ![Pong](imagens/pong.gif) | ![Breakout](imagens/breakout.gif) | ![Enduro](imagens/enduro.gif) |
 
 ## Requisitos
 
@@ -243,14 +245,14 @@ Isso torna o aprendizado mais lento e menos confiável, especialmente quando que
 
 ### Conclusão
 
-Este projeto nasceu do meu desejo nostálgico de rever os jogos que me divertiam na infância, como as incontáveis horas que passei vendo o nascer do sol na estrada de `Enduro`, a caça ao bandido dentro de um shopping no `Keystone Kapers`, do resgate de sobreviventes em `H.E.R.O.` e a busca das pílulas piscantes nos labirintos de `Pac-Man`.
+Este projeto nasceu do meu desejo nostálgico de rever os jogos que me divertiam na infância, como as incontáveis horas que pulei blocos de gelo no Ártico, em `Frostbite`, na caça ao bandido dentro de um shopping, no `Keystone Kapers`, do resgate de sobreviventes em uma caverna cheia de morcegos, em `H.E.R.O.` e na busca das pílulas piscantes nos labirintos de `Pac-Man`.
 
-| Enduro | Keystone Kapers | H.E.R.O. | Pac-Man |
+| Frostbite | Keystone Kapers | H.E.R.O. | Pac-Man |
 |:---:|:---:|:---:|:---:|
-| ![Enduro](imagens/enduro.gif) | ![Keystone Kapers](imagens/keystone_kapers.gif) | ![H.E.R.O.](imagens/hero.gif) | ![Pac-Man](imagens/pacman.gif) |
+| ![Frostbite](imagens/frostbite.gif) | ![Keystone Kapers](imagens/keystone_kapers.gif) | ![H.E.R.O.](imagens/hero.gif) | ![Pac-Man](imagens/pacman.gif) |
 
 
-Enquanto estava revendo esses jogos e acompanhando os agentes jogando sozinho, comecei a refletir em como poderiamos desenvolver aplicações de aprendizado por reforço fora dos jogos de Atari. Por exemplo, em muitas tarefas repetitivas com informações 2D, podemos utilizar agentes autônomos treinados para nos ajudar com atividades rotineiras e se extrapolarmos, até prevenir acidentes e colisões, deixando o nosso ambiente seguro, como ocorrer nos carros modernos.
+Enquanto estava revendo esses jogos e acompanhando os agentes jogando sozinho, comecei a refletir em como poderiamos desenvolver aplicações de aprendizado por reforço fora dos jogos de Atari. Por exemplo, em muitas tarefas repetitivas com informações 2D, podemos utilizar agentes autônomos treinados para nos ajudar com atividades rotineiras, como, reconhecer e fazer diagnósticos em raio-x, separação de objetos em mesas e esteiras, prevenir colisões e acidentes, como já ocorre nos carros modernos, com o objetivo de facilitar nossa vida e deixar o ambiente em nossa volta ainda mais seguro.
 
 Claro que trabalhar com aprendizado por reforço exige tempo, esforço e recursos computacionais. E obter bons resultados dependem de ter um problema bem definido, das recompensas corretas que vão orientar o agente e de limites estabelecidos para suas decisões.
 

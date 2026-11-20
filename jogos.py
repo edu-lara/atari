@@ -4,19 +4,21 @@ JOGOS = {
     "3": ("Video Pinball", "VideoPinballNoFrameskip-v4", "video_pinball"),
     "4": ("Pong", "PongNoFrameskip-v4", "pong"),
     "5": ("Breakout", "BreakoutNoFrameskip-v4", "breakout"),
+    "6": ("Enduro", "EnduroNoFrameskip-v4", "enduro"),
+
 }
 
 
 def escolher_jogo(acao="executar"):
-    print(f"Qual jogo deseja {acao}?")
+    print(f"Qual jogo deseja {acao}?\n")
     for numero, (nome, _, _) in JOGOS.items():
         print(f"{numero}. {nome}")
     print("0. Voltar")
 
     while True:
-        escolha = input("Escolha (0-5): ").strip()
+        escolha = input("\nEscolha (0-6): ").strip()
         if escolha == "0":
             return None
         if escolha in JOGOS:
             return JOGOS[escolha]
-        print("Opção inválida. Digite um número de 0 a 5.")
+        print("\nOpção inválida. Digite um número de 0 a 6.\n")
