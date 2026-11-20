@@ -37,18 +37,17 @@ def escolher_modelo(nome, slug, acao="assistir"):
 
     passos_melhor = f"{modelos['melhor'][1].num_timesteps:,}".replace(",", ".")
     passos_atual = f"{modelos['atual'][1].num_timesteps:,}".replace(",", ".")
-    if acao == "assistir":
-        limpar_terminal()
-    print(f"Qual modelo deseja {acao}?")
+    print(f"\nQual modelo deseja {acao}?")
     print(f"1. Melhor modelo — {passos_melhor} passos")
     print(f"2. Modelo atual (último) — {passos_atual} passos (padrão)")
     print("0. Voltar")
 
     while True:
-        escolha = input("Escolha (0-2, Enter para 2): ").strip()
+        escolha = input("\nEscolha (0-2, Enter para 2): ").strip()
         if not escolha:
             escolha = "2"
         if escolha == "0":
+            limpar_terminal()
             return None
         if escolha == "1":
             return modelos["melhor"]
