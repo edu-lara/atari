@@ -45,17 +45,19 @@ PARTIDAS_POR_AVALIACAO = 20
 
 
 def perguntar_passos():
-    limpar_terminal()
     while True:
         try:
-            resposta = input(
-                "Quantos passos adicionais deseja executar? "
-                "(padrão: 100.000): "
+            resposta = input(                
+                "\nQuantos passos adicionais deseja executar?"
+                "\n(padrão: 250.000): "
             ).strip()
-            passos = 100_000 if not resposta else int(resposta)
+            passos = 250_000 if not resposta else int(resposta)
         except ValueError:
             print("Digite um número inteiro positivo.")
             continue
+        if passos == 0:
+            limpar_terminal()
+            return None
         if passos > 0:
             return passos
         print("O número de passos deve ser maior que zero.")
@@ -349,7 +351,10 @@ def main():
     if jogo is None:
         return
     nome, ambiente_id, slug = jogo
-    treinar(nome, ambiente_id, slug, perguntar_passos())
+    passos = perguntar_passos()
+    if passos is None:
+        return
+    treinar(nome, ambiente_id, slug, passos)
 
 
 if __name__ == "__main__":
