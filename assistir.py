@@ -23,7 +23,8 @@ def encontrar_modelos(slug):
 def escolher_modelo(nome, slug, acao="assistir"):
     caminhos = encontrar_modelos(slug)
     if not caminhos:
-        print(f"Nenhum modelo de {nome} foi encontrado.\n")
+        print(f"\nNenhum modelo de {nome} foi encontrado.\n")
+        input("Pressione Enter para continuar.")
         return None
 
     if len(caminhos) == 1:
