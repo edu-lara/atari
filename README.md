@@ -15,6 +15,7 @@ Projeto pessoal em que estudo o aprendizado por reforço treinando agentes com P
 ## Requisitos
 
 - Python 3.10 ou superior
+- [Git](https://git-scm.com/downloads), para clonar o repositório
 - Dependências listadas em `requirements.txt`
 - Para assistir aos jogos, um ambiente gráfico compatível com a janela de renderização do Gymnasium
 
@@ -271,6 +272,43 @@ Enquanto estava revendo esses jogos e acompanhando os agentes jogando sozinho, c
 Claro que trabalhar com aprendizado por reforço exige tempo, esforço e recursos computacionais. E obter bons resultados dependem de ter um problema bem definido, das recompensas corretas que vão orientar o agente e de limites estabelecidos para suas decisões.
 
 No final, deixo o desafio de você testar este projeto no seu equipamento e a provocação de pensar em desenvolver uma aplicação para resolver uma atividade repetitiva com o aprendizado de reforço.
+
+## Erros comuns
+
+### `ModuleNotFoundError: No module named 'ale_py'`
+
+Esse erro pode ocorrer quando as dependências ainda não foram instaladas ou quando o ambiente virtual do projeto não está ativo. Na pasta do projeto, ative o ambiente e instale as dependências:
+
+```bash
+source .venv/bin/activate  # macOS e Linux
+# Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+python3 menu.py
+```
+
+No macOS e no Linux, o terminal costuma indicar que o ambiente está ativo mostrando `(.venv)` no início da linha. Se já instalou as dependências, confira se está usando o Python desse ambiente.
+
+### `can't open file .../menu: [Errno 2] No such file or directory`
+
+Esse erro aparece se você executar `python3 menu` sem a extensão `.py`. Use:
+
+```bash
+python3 menu.py
+```
+
+Execute o comando na pasta do projeto, onde está o arquivo `menu.py`. O caminho exibido na mensagem de erro depende de onde o projeto foi instalado.
+
+### Outros erros
+
+Muitos dos erros podem ocorrer por três motivos:
+- Os `requisitos` não foram instalados;
+- O `ambiente virtual` não foi inicializado;
+- Você não estava na pasta `atari`. 
+
+Confira se o ambiente virtual está ativo e se as dependências foram instaladas conforme a seção [Instalação](#instalação). 
+
+> [!NOTE]
+> Se o erro continuar, copie a mensagem completa e solicite ajuda ao ChatGPT ou ao Claude para entender o que ela indica e como resolver.
 
 ## Licença
 
