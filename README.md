@@ -60,7 +60,7 @@ python menu.py
 
 ### Treinar
 
-Essa seção treina um agente PPO para o jogo escolhido. Para isso, o programa pergunta quantos passos adicionais você deseja executar. Se pressionar Enter, o padrão é 100.000 passos.
+Essa seção treina um agente PPO para o jogo escolhido. Para isso, o programa pergunta quantos passos adicionais você deseja executar. Se pressionar Enter, o padrão é 250.000 passos.
 
 > [!NOTE]
 > O treinamento continua a partir do modelo salvo ou do checkpoint mais recente. Pressione `Q` para encerrar e salvar o modelo; `Ctrl+C` também salva.
@@ -82,6 +82,8 @@ A tabela também mostra a meta acumulada, o tempo decorrido e a estimativa de te
 
 Essa seção abre uma partida do agente para você observar como ele joga.
 
+Escolha entre assistir no modo `determinístico (padrão)` ou `probabilístico`.
+
 > [!NOTE]
 > É necessário um ambiente gráfico e um modelo treinado para o jogo escolhido. O terminal mostra o caminho do modelo e os passos de treinamento realizados.
 
@@ -89,19 +91,23 @@ Essa seção abre uma partida do agente para você observar como ele joga.
 
 Essa seção compara o agente treinado com um agente que escolhe ações aleatórias. O programa executa 10 partidas por agente, ou 5 para Video Pinball, e mostra o progresso e os resultados no terminal.
 
+Se o agente treinado apresentar resultados piores que o agente que escolhe ações aleatórias, será necessário treiná-lo por mais passos naquele jogo.
+
 ### Diagnosticar
 
 Essa seção executa automaticamente os dois modos de decisão do agente:
 
-- **Determinístico:** escolhe a ação mais provável.
-- **Probabilístico:** amostra uma ação.
+- **Determinístico:** o agente escolhe a ação mais provável (`modo padrão`).
+- **Probabilístico:** sorteia uma ação conforme as probabilidades aprendidas.
+
+O diagnóstico compara a recompensa média do modelo nos dois modos e ajuda a decidir qual escolher ao assistir.
 
 ### Simular ambiente
 
-Essa seção abre o ambiente escolhido e simula até 450 passos com ações aleatórias.
+Essa seção apenas abre o ambiente escolhido e simula até 450 passos com ações aleatórias.
 
 > [!NOTE]
-> Como essa opção não usa um modelo treinado, ela serve para conferir o ambiente e ver como é o jogo.
+> Como essa opção não usa um modelo treinado, ele é ótimo para conferir o ambiente e ver como funciona o jogo.
 
 ### Progresso do treinamento
 
