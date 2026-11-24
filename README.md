@@ -308,7 +308,7 @@ Muitos dos erros podem ocorrer por três motivos:
 
 Confira se o ambiente virtual está ativo e se as dependências foram instaladas conforme a seção [Instalação](#instalação). 
 
-> [!NOTE]
+> [!TIP]
 > Se o erro continuar, copie a mensagem completa e solicite ajuda ao ChatGPT ou ao Claude para entender o que ela indica e como resolver.
 
 ## Licença
