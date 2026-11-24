@@ -46,15 +46,16 @@ python menu.py
 ```
 
 ```text
-+--------------------------------+
-| O que deseja fazer?            |
-| 1. Treinar                     |
-| 2. Assistir                    |
-| 3. Avaliar                     |
-| 4. Diagnosticar                |
-| 5. Simular ambiente            |
-| 0. Sair                        |
-+--------------------------------+
++---------------------------------+
+| O que deseja fazer?             |
+| 1. Treinar                      |
+| 2. Assistir                     |
+| 3. Avaliar                      |
+| 4. Diagnosticar                 |
+| 5. Simular ambiente             |
+| 6. Ver progresso do treinamento |
+| 0. Sair                         |
++---------------------------------+
 ```
 
 ### Treinar
@@ -63,6 +64,19 @@ Essa seção treina um agente PPO para o jogo escolhido. Para isso, o programa p
 
 > [!NOTE]
 > O treinamento continua a partir do modelo salvo ou do checkpoint mais recente. Pressione `Q` para encerrar e salvar o modelo; `Ctrl+C` também salva.
+
+#### Entender a tabela de treinamento
+
+O Stable-Baselines3 atualiza a tabela periodicamente. Os valores grandes podem aparecer em notação científica: `1.2e+04` significa 12.000.
+
+| Métrica | Significado |
+|---|---|
+| `rollout/ep_rew_mean` | Recompensa média das partidas registrada pelo Monitor; pode mostrar a pontuação original, mesmo que o PPO aprenda com recompensa recortada. |
+| `rollout/ep_len_mean` | Duração média em passos do ambiente; o frame skip faz cada decisão avançar quatro frames. |
+| `time/total_timesteps` | Passos acumulados pelo agente. |
+| `time/fps` | Velocidade aproximada do treinamento. |
+
+A tabela também mostra a meta acumulada, o tempo decorrido e a estimativa de tempo restante.
 
 ### Assistir
 
@@ -89,18 +103,12 @@ Essa seção abre o ambiente escolhido e simula até 450 passos com ações alea
 > [!NOTE]
 > Como essa opção não usa um modelo treinado, ela serve para conferir o ambiente e ver como é o jogo.
 
-## Entender a tabela de treinamento
+### Progresso do treinamento
 
-O Stable-Baselines3 atualiza a tabela periodicamente. Os valores grandes podem aparecer em notação científica: `1.2e+04` significa 12.000.
+A opção **Ver progresso do treinamento** mostra uma tabela com os passos de treinamento registrados no melhor modelo e no modelo atual de cada jogo. Os valores são lidos dos arquivos salvos, sem carregar os modelos para uso.
 
-| Métrica | Significado |
-|---|---|
-| `rollout/ep_rew_mean` | Recompensa média das partidas registrada pelo Monitor; pode mostrar a pontuação original, mesmo que o PPO aprenda com recompensa recortada. |
-| `rollout/ep_len_mean` | Duração média em passos do ambiente; o frame skip faz cada decisão avançar quatro frames. |
-| `time/total_timesteps` | Passos acumulados pelo agente. |
-| `time/fps` | Velocidade aproximada do treinamento. |
-
-A tabela também mostra a meta acumulada, o tempo decorrido e a estimativa de tempo restante.
+> [!NOTE]
+> Um travessão (`—`) indica que o modelo não existe ou não contém um valor legível.
 
 ## Arquivos e resultados
 
@@ -108,13 +116,13 @@ A tabela também mostra a meta acumulada, o tempo decorrido e a estimativa de te
 - `jogos.py`: lista de jogos e menu de seleção compartilhado.
 - `ambientes_atari.py`: configuração dos ambientes de treinamento.
 - `terminal.py`: limpeza de tela e funções de interação no terminal.
-- `treinar.py`, `assistir.py`, `avaliar.py`, `diagnosticar.py`, `simular.py`: ferramentas do projeto.
+- `treinar.py`, `assistir.py`, `avaliar.py`, `diagnosticar.py`, `simular.py`, `progresso.py`: ferramentas do projeto.
 - `modelos/<jogo>_atual.zip`: modelo atual de cada jogo.
 - `modelos/<jogo>_melhor/best_model.zip`: melhor modelo salvo nas avaliações periódicas.
 - `modelos/<jogo>_*_steps.zip`: checkpoints; ao fim de cada sessão, ficam os dois mais recentes.
 - `logs/`: registros do treinamento, avaliações e TensorBoard.
 
-Os nomes usados nos caminhos são `freeway`, `atlantis`, `video_pinball`, `pong` e `breakout`.
+Os nomes usados nos caminhos são `freeway`, `atlantis`, `video_pinball`, `pong`, `breakout` e `enduro`.
 
 Modelos e logs são gerados localmente e ignorados pelo Git.
 

@@ -1,8 +1,6 @@
 import gc
 from pathlib import Path
 
-from stable_baselines3 import PPO
-
 from ambientes_atari import criar_ambiente_atari
 from jogos import escolher_jogo
 from terminal import LeitorTeclaQ, limpar_terminal
@@ -28,32 +26,31 @@ def escolher_modelo(nome, slug, acao="assistir"):
         print(f"Nenhum modelo de {nome} foi encontrado.\n")
         return None
 
-    modelos = {
-        tipo: (caminho, PPO.load(caminho, device="cpu"))
-        for tipo, caminho in caminhos.items()
-    }
-    if len(modelos) == 1:
-        return next(iter(modelos.values()))
+    if len(caminhos) == 1:
+        caminho = next(iter(caminhos.values()))
+    else:
+        print(f"\nQual modelo deseja {acao}?")
+        print("1. Melhor modelo")
+        print("2. Modelo atual (último) — padrão")
+        print("0. Voltar")
 
-    passos_melhor = f"{modelos['melhor'][1].num_timesteps:,}".replace(",", ".")
-    passos_atual = f"{modelos['atual'][1].num_timesteps:,}".replace(",", ".")
-    print(f"\nQual modelo deseja {acao}?")
-    print(f"1. Melhor modelo — {passos_melhor} passos")
-    print(f"2. Modelo atual (último) — {passos_atual} passos (padrão)")
-    print("0. Voltar")
+        while True:
+            escolha = input("\nEscolha (0-2, Enter para 2): ").strip() or "2"
+            if escolha == "0":
+                limpar_terminal()
+                return None
+            if escolha == "1":
+                caminho = caminhos["melhor"]
+                break
+            if escolha == "2":
+                caminho = caminhos["atual"]
+                break
+            print("Opção inválida. Digite 0, 1 ou 2.")
 
-    while True:
-        escolha = input("\nEscolha (0-2, Enter para 2): ").strip()
-        if not escolha:
-            escolha = "2"
-        if escolha == "0":
-            limpar_terminal()
-            return None
-        if escolha == "1":
-            return modelos["melhor"]
-        if escolha == "2":
-            return modelos["atual"]
-        print("Opção inválida. Digite 0, 1 ou 2.")
+    # Importa e carrega o algoritmo somente depois que o usuário escolher o modelo.
+    # Isso evita carregar um modelo que não será usado.
+    from stable_baselines3 import PPO
+    return caminho, PPO.load(caminho, device="cpu")
 
 
 def main():

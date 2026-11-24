@@ -25,6 +25,17 @@ def aguardar_continuar():
         input("\nConcluído. Pressione Enter para continuar.")
 
 
+def garantir_terminal_interativo():
+    """Reativa eco e leitura por linha após um subprocesso interativo."""
+    if not sys.stdin.isatty() or termios is None:
+        return
+
+    fd = sys.stdin.fileno()
+    configuracao = termios.tcgetattr(fd)
+    configuracao[3] |= termios.ECHO | termios.ICANON | termios.ISIG
+    termios.tcsetattr(fd, termios.TCSADRAIN, configuracao)
+
+
 class LeitorTeclaQ:
     def __init__(self):
         self.fd = None
