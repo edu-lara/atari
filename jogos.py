@@ -6,6 +6,11 @@ JOGOS = {
     "5": ("Breakout", "BreakoutNoFrameskip-v4", "breakout"),
     "6": ("Enduro", "EnduroNoFrameskip-v4", "enduro"),
 
+    # Para adicionar um jogo Atari:
+    # 1. Consulte https://ale.farama.org/environments/ e abra a página do jogo
+    #    para encontrar o ID do ambiente (por exemplo, MsPacmanNoFrameskip-v4).
+    # 2. Duplique uma linha e atualize o nome, o ID do ambiente e o slug.
+
 }
 
 
