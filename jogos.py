@@ -1,3 +1,5 @@
+from terminal import limpar_terminal
+
 JOGOS = {
     "1": ("Freeway", "FreewayNoFrameskip-v4", "freeway"),
     "2": ("Atlantis", "AtlantisNoFrameskip-v4", "atlantis"),
@@ -15,15 +17,17 @@ JOGOS = {
 
 
 def escolher_jogo(acao="executar"):
-    print(f"Qual jogo deseja {acao}?\n")
-    for numero, (nome, _, _) in JOGOS.items():
-        print(f"{numero}. {nome}")
-    print("0. Voltar")
-
     while True:
+        limpar_terminal()
+        print(f"Qual jogo deseja {acao}?\n")
+        for numero, (nome, _, _) in JOGOS.items():
+            print(f"{numero}. {nome}")
+        print("0. Voltar")
+
         escolha = input("\nEscolha (0-6): ").strip()
         if escolha == "0":
             return None
         if escolha in JOGOS:
             return JOGOS[escolha]
         print("\nOpção inválida. Digite um número de 0 a 6.\n")
+        input("Pressione Enter para continuar.")
