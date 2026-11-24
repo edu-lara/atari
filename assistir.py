@@ -29,12 +29,13 @@ def escolher_modelo(nome, slug, acao="assistir"):
     if len(caminhos) == 1:
         caminho = next(iter(caminhos.values()))
     else:
-        print(f"\nQual modelo deseja {acao}?")
-        print("1. Melhor modelo")
-        print("2. Modelo atual (último) — padrão")
-        print("0. Voltar")
-
         while True:
+            limpar_terminal()
+            print(f"Qual modelo deseja {acao}?\n")
+            print("1. Melhor modelo")
+            print("2. Modelo atual (último) — padrão")
+            print("0. Voltar")
+
             escolha = input("\nEscolha (0-2, Enter para 2): ").strip() or "2"
             if escolha == "0":
                 limpar_terminal()
@@ -45,12 +46,38 @@ def escolher_modelo(nome, slug, acao="assistir"):
             if escolha == "2":
                 caminho = caminhos["atual"]
                 break
-            print("Opção inválida. Digite 0, 1 ou 2.")
+            print("\nOpção inválida. Digite 0, 1 ou 2.\n")
+            input("Pressione Enter para continuar.")
 
     # Importa e carrega o algoritmo somente depois que o usuário escolher o modelo.
     # Isso evita carregar um modelo que não será usado.
     from stable_baselines3 import PPO
     return caminho, PPO.load(caminho, device="cpu")
+
+
+def escolher_modo(slug):
+    deterministico_padrao = slug != "video_pinball"
+    modo_padrao = "1" if deterministico_padrao else "2"
+    descricao_padrao = "determinístico" if deterministico_padrao else "probabilístico"
+
+    while True:
+        limpar_terminal()
+        print("Como deseja que o agente escolha as ações?\n")
+        print("1. Determinístico (ação mais provável) - padrão")
+        print("2. Probabilístico (probabilidades aprendidas)")
+        print("0. Voltar")
+
+        escolha = input(
+            f"\nEscolha (0-2, Enter para {descricao_padrao}): "
+        ).strip() or modo_padrao
+        if escolha == "0":
+            return None
+        if escolha == "1":
+            return True
+        if escolha == "2":
+            return False
+        print("\nOpção inválida. Digite 0, 1 ou 2.\n")
+        input("Pressione Enter para continuar.")
 
 
 def main():
@@ -60,9 +87,18 @@ def main():
         if jogo is None:
             return
         nome, ambiente_id, slug = jogo
-        modelo_selecionado = escolher_modelo(nome, slug)
-        if modelo_selecionado is not None:
+        while True:
+            modelo_selecionado = escolher_modelo(nome, slug)
+            if modelo_selecionado is None:
+                break
             arquivo_modelo, modelo = modelo_selecionado
+            deterministico = escolher_modo(slug)
+            if deterministico is not None:
+                break
+            # Volta à escolha do modelo; se só houver um, volta ao jogo.
+            if len(encontrar_modelos(slug)) == 1:
+                break
+        if modelo_selecionado is not None and deterministico is not None:
             break
 
     env = criar_ambiente_atari(
@@ -89,12 +125,7 @@ def main():
         teclado.iniciar()
 
         while True:
-            # No Pinball, a ação modal do modelo pode manter uma combinação
-            # como RIGHTFIRE indefinidamente; amostrar a política permite que
-            # ela alterne flippers e use DOWN/FIRE quando necessário.
-            acao, _ = modelo.predict(
-                observacao, deterministic=(slug != "video_pinball")
-            )
+            acao, _ = modelo.predict(observacao, deterministic=deterministico)
             observacao, recompensas, terminou, _ = env.step(acao)
             recompensa_total += float(recompensas[0])
 
