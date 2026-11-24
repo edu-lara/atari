@@ -53,7 +53,7 @@ def perguntar_passos():
             ).strip()
             passos = 250_000 if not resposta else int(resposta)
         except ValueError:
-            print("Digite um número inteiro positivo.")
+            print("\nDigite um número inteiro positivo.")
             continue
         if passos == 0:
             limpar_terminal()
