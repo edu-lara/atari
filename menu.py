@@ -33,6 +33,7 @@ def main():
             return
         if escolha not in opcoes:
             print("\nOpção inválida. Digite um número de 0 a 6.\n")
+            input("Pressione Enter para continuar.")
             continue
 
         _, modulo = opcoes[escolha]
