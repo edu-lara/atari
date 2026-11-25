@@ -118,6 +118,10 @@ class AvaliacaoPorPassos(EvalCallback):
         if (self.evaluations_timesteps
                 and self.evaluations_timesteps[-1] == self.num_timesteps):
             return
+        print(
+            "\nTreinamento concluído: Aguarde enquanto avalio o modelo.\n",
+            flush=True,
+        )
         self.proxima_avaliacao = self.num_timesteps
         super()._on_step()
 
