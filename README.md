@@ -50,8 +50,8 @@ Dentro da pasta `atari`, crie e ative um ambiente virtual e instale as dependên
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate # para macOS e Linux
-# .venv\Scripts\activate  # para Windows
+source .venv/bin/activate # macOS e Linux
+.venv\Scripts\activate    # Windows (PowerShell)
 pip install -r requirements.txt
 ```
 
@@ -299,8 +299,8 @@ No final, deixo o desafio de você testar este projeto no seu equipamento e a pr
 Esse erro pode ocorrer quando as dependências ainda não foram instaladas ou quando o ambiente virtual do projeto não está ativo. Na pasta do projeto, ative o ambiente e instale as dependências:
 
 ```bash
-source .venv/bin/activate # para macOS e Linux
-# .venv\Scripts\activate  # para Windows
+source .venv/bin/activate # macOS e Linux
+.venv\Scripts\activate    # Windows (PowerShell)
 pip install -r requirements.txt
 python3 menu.py
 ```
