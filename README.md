@@ -50,8 +50,8 @@ Dentro da pasta `atari`, crie e ative um ambiente virtual e instale as dependên
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate # Para macOS e Linux
-# Para Windows: .venv\Scripts\activate
+source .venv/bin/activate # para macOS e Linux
+# .venv\Scripts\activate  # para Windows
 pip install -r requirements.txt
 ```
 
@@ -91,10 +91,10 @@ O Stable-Baselines3 atualiza a tabela periodicamente. Os valores grandes podem a
 
 | Métrica | Significado |
 |---|---|
-| `rollout/ep_rew_mean` | Recompensa média das partidas registrada pelo Monitor; pode mostrar a pontuação original, mesmo que o PPO aprenda com recompensa recortada. |
 | `rollout/ep_len_mean` | Duração média em passos do ambiente; o frame skip faz cada decisão avançar quatro frames. |
-| `time/total_timesteps` | Passos acumulados pelo agente. |
+| `rollout/ep_rew_mean` | Recompensa média das partidas registrada pelo Monitor; pode mostrar a pontuação original, mesmo que o PPO aprenda com recompensa recortada. |
 | `time/fps` | Velocidade aproximada do treinamento. |
+| `time/total_timesteps` | Passos acumulados pelo agente. |
 
 A tabela também mostra a meta acumulada, o tempo decorrido e a estimativa de tempo restante.
 
@@ -299,8 +299,8 @@ No final, deixo o desafio de você testar este projeto no seu equipamento e a pr
 Esse erro pode ocorrer quando as dependências ainda não foram instaladas ou quando o ambiente virtual do projeto não está ativo. Na pasta do projeto, ative o ambiente e instale as dependências:
 
 ```bash
-source .venv/bin/activate # Para macOS e Linux
-# Para Windows: .venv\Scripts\activate
+source .venv/bin/activate # para macOS e Linux
+# .venv\Scripts\activate  # para Windows
 pip install -r requirements.txt
 python3 menu.py
 ```
