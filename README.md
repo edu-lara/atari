@@ -12,13 +12,6 @@ Projeto pessoal em que estudo o aprendizado por reforço treinando agentes com P
 | Pong | Breakout | Enduro |
 | ![Pong](imagens/pong.gif) | ![Breakout](imagens/breakout.gif) | ![Enduro](imagens/enduro.gif) |
 
-## Requisitos
-
-- [Python](https://www.python.org/downloads/) 3.10 ou superior
-- [Git](https://git-scm.com/downloads), para clonar o repositório
-- Dependências listadas em `requirements.txt`
-- Para assistir aos jogos, um ambiente gráfico compatível com a janela de renderização do Gymnasium
-
 ## O que é o Aprendizado por Reforço?
 
 O aprendizado por reforço (em inglês, reinforcement learning) é uma área de aprendizado de máquina em que um agente aprende a tomar decisões por tentativa e erro, interagindo com um ambiente para maximizar recompensas acumuladas ao longo do tempo. Diferente do aprendizado supervisionado, ela não depende de exemplos rotulados prontos; o modelo descobre o que funciona pela própria experiência.
@@ -36,6 +29,13 @@ O processo costuma ser modelado como um ciclo contínuo:
 - **Política**: a estratégia que define qual ação tomar em cada estado.
 
 A cada passo, o agente observa o estado, escolhe uma ação, recebe uma recompensa e passa a um novo estado. Durante o treino, ele lida com o dilema entre explorar novas ações (que podem trazer descobertas) e aproveitar o que já sabe que funciona bem.
+
+## Requisitos
+
+- [Python](https://www.python.org/downloads/) 3.10 ou superior
+- [Git](https://git-scm.com/downloads), para clonar o repositório
+- Dependências listadas em `requirements.txt`
+- Para assistir aos jogos, um ambiente gráfico compatível com a janela de renderização do Gymnasium
 
 ## Instalação
 
