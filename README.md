@@ -19,6 +19,24 @@ Projeto pessoal em que estudo o aprendizado por reforço treinando agentes com P
 - Dependências listadas em `requirements.txt`
 - Para assistir aos jogos, um ambiente gráfico compatível com a janela de renderização do Gymnasium
 
+## O que é o Aprendizado por Reforço?
+
+O aprendizado por reforço (em inglês, reinforcement learning) é uma área de aprendizado de máquina em que um agente aprende a tomar decisões por tentativa e erro, interagindo com um ambiente para maximizar recompensas acumuladas ao longo do tempo. Diferente do aprendizado supervisionado, ela não depende de exemplos rotulados prontos; o modelo descobre o que funciona pela própria experiência.
+
+### Como ele funciona?
+
+![Modelo de Aprendizado por Reforço](/imagens/modelo-aprendizado-por-reforco.webp) 
+
+O processo costuma ser modelado como um ciclo contínuo:
+- **Agente**: o algoritmo ou o modelo que toma decisões.
+- **Ação**: a escolha feita pelo agente em um dado estado.
+- **Ambiente**: o espaço ou a simulação onde o agente atua e que muda de condição.
+- **Estado**: a situação atual do ambiente observada pelo agente.
+- **Recompensa**: o retorno numérico (positivo ou negativo) que indica se a ação ajudou no objetivo.
+- **Política**: a estratégia que define qual ação tomar em cada estado.
+
+A cada passo, o agente observa o estado, escolhe uma ação, recebe uma recompensa e passa a um novo estado. Durante o treino, ele lida com o dilema entre explorar novas ações (que podem trazer descobertas) e aproveitar o que já sabe que funciona bem.
+
 ## Instalação
 
 Clone o repositório e entre na pasta do projeto:
