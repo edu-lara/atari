@@ -14,7 +14,7 @@ Projeto pessoal em que estudo o aprendizado por reforço treinando agentes com P
 
 ## Requisitos
 
-- Python 3.10 ou superior
+- [Python](https://www.python.org/downloads/) 3.10 ou superior
 - [Git](https://git-scm.com/downloads), para clonar o repositório
 - Dependências listadas em `requirements.txt`
 - Para assistir aos jogos, um ambiente gráfico compatível com a janela de renderização do Gymnasium
