@@ -127,12 +127,13 @@ class AvaliacaoPorPassos(EvalCallback):
 
 
 class PararComQ(BaseCallback):
-    def __init__(self, passos_iniciais, passos_solicitados):
+    def __init__(self, passos_iniciais, passos_solicitados, nome):
         super().__init__()
         self.fd = None
         self.configuracao_original = None
         self.passos_iniciais = passos_iniciais
         self.passos_solicitados = passos_solicitados
+        self.nome = nome
 
     def _on_training_start(self):
         # O SB3 configura o logger ao iniciar learn(); nesse ponto ele já
@@ -143,6 +144,7 @@ class PararComQ(BaseCallback):
                     sys.stdout,
                     self.passos_iniciais,
                     self.passos_solicitados,
+                    self.nome,
                 )
                 break
 
@@ -181,10 +183,11 @@ class PararComQ(BaseCallback):
 class HumanOutputFormatComAviso(HumanOutputFormat):
     """Exibe a instrução de parada logo depois de cada tabela do PPO."""
 
-    def __init__(self, filename_or_file, passos_iniciais, passos_solicitados):
+    def __init__(self, filename_or_file, passos_iniciais, passos_solicitados, nome):
         super().__init__(filename_or_file)
         self.passos_iniciais = passos_iniciais
         self.passos_solicitados = passos_solicitados
+        self.nome = nome
 
     @staticmethod
     def formatar_numero(valor):
@@ -234,6 +237,7 @@ class HumanOutputFormatComAviso(HumanOutputFormat):
         largura_barra = 20
         preenchidos = round(percentual / 100 * largura_barra)
         barra = "#" * preenchidos + "-" * (largura_barra - preenchidos)
+        print(f"Treinando: {self.nome}")
         print(
             f"{self.formatar_numero(passos_sessao)} / "
             f"{self.formatar_numero(self.passos_solicitados)} passos",
@@ -304,7 +308,7 @@ def treinar(nome, ambiente_id, slug, passos_adicionais):
         print(f"Total previsto: {inicio + passos_adicionais:,}")
         print("O PPO pode passar um pouco do total solicitado para concluir um ciclo.")
 
-        teclado = PararComQ(inicio, passos_adicionais)
+        teclado = PararComQ(inicio, passos_adicionais, nome)
         callback_checkpoint = CheckpointCallback(
             save_freq=max(INTERVALO_CHECKPOINT // NUM_AMBIENTES, 1),
             save_path=str(pasta_modelos), name_prefix=prefixo_checkpoint,
