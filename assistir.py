@@ -69,7 +69,7 @@ def escolher_modo(slug):
         print("0. Voltar")
 
         escolha = input(
-            f"\nEscolha (0-2, Enter para {descricao_padrao}): "
+            f"\nEscolha (0-2, Enter para 1): "
         ).strip() or modo_padrao
         if escolha == "0":
             return None

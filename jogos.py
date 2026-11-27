@@ -24,10 +24,11 @@ def escolher_jogo(acao="executar"):
             print(f"{numero}. {nome}")
         print("0. Voltar")
 
-        escolha = input("\nEscolha (0-6): ").strip()
+        maior_opcao = len(JOGOS)
+        escolha = input(f"\nEscolha (0-{maior_opcao}): ").strip()
         if escolha == "0":
             return None
         if escolha in JOGOS:
             return JOGOS[escolha]
-        print("\nOpção inválida. Digite um número de 0 a 6.\n")
+        print(f"\nOpção inválida. Digite um número de 0 a {maior_opcao}.\n")
         input("Pressione Enter para continuar.")
